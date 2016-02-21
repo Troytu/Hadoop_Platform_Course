@@ -33,7 +33,7 @@ hdfs dfs -put join2*.txt /user/cloudera/input_join2
 
 hdfs dfs -ls /user/cloudera/input_join2
 
-hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-2.6.3.jar -input /user/cloudera/input_join2 -output /user/cloudera/output_join2 -mapper ./join2_mapper.py -reducer ./join2_reducer.py
+hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-2.6.3.jar -input /user/cloudera/input_join3 -output /user/cloudera/output_join2 -mapper ./join2_mapper.py -reducer ./join2_reducer.py
 
 hdfs dfs -ls /user/cloudera/output_join2/part-00000
 
@@ -59,4 +59,8 @@ Change the value of core-site.xml
 ```
 
 For default the temp folder is set for **/tmp** folder. This folder is cleanup by SO on each reboot.
+
+
+
+hadoop fs -rm -r -f user/cloudera/output_join2 
 

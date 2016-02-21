@@ -4,6 +4,7 @@ import sys
 previous = ''
 sum = 0
 line_count = 0
+has_abc = False
 for line in sys.stdin:
     # Same logic from wordcount
     line_count += 1
@@ -13,14 +14,16 @@ for line in sys.stdin:
     value = key_value[1]
     # If previous differs from actual key, means that key is updated. we need to print the previous values.
     if key != previous:
-        if line_count > 1:
+        if line_count > 1 and has_abc:
             print ('{0}\t{1}'.format(previous, sum))
-            sum = 0
+        sum = 0
         previous = key
-    # I guess this was useful, but not
-    # if value == 'ABC':
-    #     sum += 1
-    if value.isdigit():
+        has_abc = False
+
+    if value == 'ABC':
+        has_abc = True
+    elif value.isdigit():
         sum += int(value)
 
-print ('{0} \t {1}'.format(previous, sum))
+if has_abc:
+    print ('{0} \t {1}'.format(previous, sum))
